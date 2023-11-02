@@ -1,0 +1,11 @@
+# 应用于分文件编写的配置文件
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    password:
+    username:
+    url:
+  config:
+    activate:
+      on-profile: test
