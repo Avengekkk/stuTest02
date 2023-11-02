@@ -1,3 +1,15 @@
+# 应用环境
+# 系统默认使用第一个,同时可以在第一个中配置其他环境中公共的部分
+spring:
+  profiles:
+    active: dev
+    # include: 这个include属性可以将其他作用不同框架(比如spring,springMVC)的配置文件包含进来
+
+
+
+
+# 本机的开发环境
+---
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/dbtest01
@@ -12,14 +24,51 @@ spring:
       prefix: /static/html
       suffix: .html
     static-path-pattern: /static/**
-
   web:
     resources:
       static-locations: classpath:/static/
       add-mappings: true
+#命名当前环境为dev
+  config:
+    activate:
+      on-profile: dev
 mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 server:
   port: 8080
   address: 0.0.0.0
+#debug默认是FALSE 而且debug信息太多了,默认关掉
+debug: false
+#设置日志的记录信息的级别
+logging:
+  level:
+    #在根目录下统一使用该级别的日志记录
+    root: info
+  pattern:
+    # 设置日志在控制台输出的格式
+    #console: "%date - %message %n"
+    console:
+  file:
+    path: "C:\\Users\\wang'hao\\Desktop\\log"
+  logback:
+    rollingpolicy:
+      max-file-size: 10KB
+      file-name-pattern: stuTest.%d.%i.log
+
+
+
+
+
+
+# 测试环境
+---
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    password:
+    username:
+    url:
+  config:
+    activate:
+      on-profile: test
